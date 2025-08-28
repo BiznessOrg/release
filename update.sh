@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 
-REPO="BiznessOrg/release"
-CURRENT_VERSION=$(cat version.lock 2>/dev/null || echo "")
-LATEST_VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq -r '.tag_name')
-
 for pkg in curl jq stow unzip; do
    if ! command -v "$pkg" &> /dev/null; then
       doas apk add "$pkg"
    fi
 done
+
+REPO="BiznessOrg/release"
+CURRENT_VERSION=$(cat version.lock 2>/dev/null || echo "")
+LATEST_VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq -r '.tag_name')
 
 cd $HOME
 
