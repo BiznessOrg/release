@@ -6,7 +6,7 @@ LATEST_VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | 
 
 for pkg in curl jq stow unzip; do
    if ! command -v "$pkg" &> /dev/null; then
-      sudo apk add "$pkg"
+    doas apk add "$pkg"
    fi
 done
 
