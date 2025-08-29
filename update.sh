@@ -22,5 +22,5 @@ if [ -z "$CURRENT_VERSION" ] || [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; the
 	unzip "packages.zip" &&
 	rm "packages.zip" &&
 	echo "$LATEST_VERSION" > version.lock &&
-	cd packages && apk add *.apk
+	cd packages && apk add --allow-untrusted *.apk
 fi
