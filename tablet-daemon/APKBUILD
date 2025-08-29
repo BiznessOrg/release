@@ -1,0 +1,39 @@
+# Contributor:
+# Maintainer:
+pkgname=tablet-daemon
+pkgver=0.0.5
+pkgrel=0
+pkgdesc="tablet daemon"
+url="localhost"
+arch="all"
+license="ALL_RIGHTS_RESERVED(peasent)"
+depends=""
+makedepends="go"
+checkdepends=""
+# install="$pkgname.pre-install $pkgname.post-install"
+source="
+	tablet-daemon.initd
+	tablet-daemon.confd
+	"
+builddir="$srcdir/"
+options="!check"
+
+build() {
+	ln -s $HOME/bizness-daemon/ "$srcdir/$pkgname-$pkgver"
+	cd "$srcdir/$pkgname-$pkgver"
+	go build .
+}
+
+package() {
+	install -m755 -D "$srcdir"/$pkgname.initd \
+		"$pkgdir"/etc/init.d/$pkgname
+	install -m644 -D "$srcdir"/$pkgname.confd \
+		"$pkgdir"/etc/conf.d/$pkgname
+	
+	install -m755 -D "$srcdir/$pkgname-$pkgver/bizness-daemon" "$pkgdir/usr/bin/tablet-daemon"
+}
+
+sha512sums="
+7088881df8962225253d71164f96add614bf602d1aeb0401f54fdcad51a4cc33ef160006b0cf5e66b5efd210fbc553662360c34192a0c0526690578bfa0f08b1  tablet-daemon.initd
+74fd6d07fb26ff43b257e8b914facdc220d3d84956adfb7bb302e5b65d718967dacb76133b59fde77855c5c94eada88292dd3cc9b80be3e14a570c96490e7080  tablet-daemon.confd
+"

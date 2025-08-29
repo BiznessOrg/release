@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+name="tablet-daemon"
+description="tablet-daemon initd"
+command="/usr/bin/tablet-daemon"
+command_background="yes"
+command_user="root"
+pidfile="/run/$RC_SVCNAME.pid"
+
+depend() {
+	need net
+	after firewall
+}

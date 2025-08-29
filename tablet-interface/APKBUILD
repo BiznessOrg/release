@@ -1,0 +1,29 @@
+# Contributor:
+# Maintainer:
+pkgname=tablet-interface
+pkgver=0.0.5
+pkgrel=0
+pkgdesc="tablet interface"
+arch="all"
+license="LGPL2"
+url="localhost"
+depends="evince gtkmm4"
+makedepends="cmake gtkmm4-dev"
+checkdepends=""
+source=""
+builddir="$srcdir/"
+options="!check"
+
+build() {
+	ln -s $HOME/TabletInterface/ "$srcdir/$pkgname-$pkgver"
+	cd "$srcdir/$pkgname-$pkgver"
+	cmake -Bbuild -DCMAKE_BUILD_TYPE="RelMinSize" .
+	cd build
+	make -j6
+}
+
+package() {
+	install -Dm755 "$srcdir/$pkgname-$pkgver/build/main-module/main-module" "$pkgdir/usr/bin/tablet-interface"
+	mkdir -p "$pkgdir/usr/share/tablet-interface"
+	cp -r "$srcdir/$pkgname-$pkgver/resources" "$srcdir/$pkgname-$pkgver/pdfs" "$pkgdir/usr/share/tablet-interface/"
+}

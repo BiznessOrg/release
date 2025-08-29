@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# add something which happens after install
+rc-update add tablet-daemon
+rc-service tablet-daemon restart
