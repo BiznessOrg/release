@@ -1,0 +1,33 @@
+#!/bin/env sh
+##########################################
+# TableX setup script for Alpine Linux   #
+##########################################
+
+echo "## TableX Setup Script Started ##"
+doas pkg update
+echo "sway setup"
+doas setup-desktop sway
+doas pkg add curl agetty
+mkdir -p ~/.config/sway
+# cp /etc/sway/config ~/.config/sway/config
+echo "writing sway config"
+cat > ~/.config/sway/config << eof
+bar {
+    mode invisible
+}
+default_border none
+default_floating_border none
+font pango:monospace 0.0001
+eof
+echo "Sway autostart setup"
+echo "exec sway" > ~/.profile
+
+echo "autologin setup"
+doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin root tty1 linux|' /etc/inittab
+
+echo "installing TableX packages"
+https://raw.githubusercontent.com/BiznessOrg/release/refs/heads/master/update.sh | doas sh
+doas rc-update add tablet-daemon default
+echo "rebooting in 5 seconds..."
+sleep 5
+doas reboot

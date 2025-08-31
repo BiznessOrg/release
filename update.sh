@@ -5,7 +5,7 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-for pkg in curl jq stow unzip; do
+for pkg in curl stow unzip; do
 	apk add "$pkg"
 done
 
@@ -21,6 +21,6 @@ if [ -z "$CURRENT_VERSION" ] || [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; the
 	rm -rf packages 2>/dev/null &&
 	unzip "packages.zip" &&
 	rm "packages.zip" &&
-	echo "$LATEST_VERSION" > version.lock &&
-	cd packages && apk add --allow-untrusted *.apk
+	cd packages && apk add --allow-untrusted *.apk &&
+  cd .. && echo "$LATEST_VERSION" > version.lock
 fi
