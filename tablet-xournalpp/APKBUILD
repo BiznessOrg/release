@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer:
 pkgname=tablet-xournalpp
-pkgver=0.0.5
+pkgver=0.0.6
 pkgrel=0
 pkgdesc="xournalpp tablet yeah"
 url="localhost"
@@ -28,7 +28,6 @@ makedepends="
 	samurai
 	"
 options="!check"
-subpackages="$pkgname-dbg $pkgname-doc $pkgname-lang"
 
 build() {
 	ln -s $HOME/xournalpp "$srcdir/$pkgname-$pkgver"
