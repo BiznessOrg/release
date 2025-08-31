@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer:
 pkgname=tablet-daemon
-pkgver=0.0.5
+pkgver=0.0.6
 pkgrel=0
 pkgdesc="tablet daemon"
 url="localhost"
