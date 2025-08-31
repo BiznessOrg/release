@@ -23,7 +23,8 @@ echo "Sway autostart setup"
 echo "exec sway" > ~/.profile
 
 echo "autologin setup"
-doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin root tty1 linux|' /etc/inittab
+doas cp /etc/inittab /etc/inittab.bak
+doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin tablex tty1 linux|"" /etc/inittab
 
 echo "installing TableX packages"
 https://raw.githubusercontent.com/BiznessOrg/release/refs/heads/master/update.sh | doas sh
