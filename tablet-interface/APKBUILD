@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer:
 pkgname=tablet-interface
-pkgver=0.0.6
+pkgver=0.0.7
 pkgrel=0
 pkgdesc="tablet interface"
 arch="all"
