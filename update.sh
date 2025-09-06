@@ -5,7 +5,8 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-apk add curl stow unzip jq
+apk update
+apk add curl unzip jq
 
 cd $HOME
 
