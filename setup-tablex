@@ -17,6 +17,7 @@ cat >> ~/.config/sway/config << eof
 default_border none
 default_floating_border none
 font pango:monospace 0.001
+exec tablet-interface
 eof
 sed -i 's|position top|mode invisible|g' ~/.config/sway/config
 
