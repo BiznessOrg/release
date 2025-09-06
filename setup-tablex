@@ -4,10 +4,10 @@
 ##########################################
 
 echo "## TableX Setup Script Started ##"
-doas akg update
+doas apk update
 echo "sway setup"
 doas setup-desktop sway
-doas akg add curl agetty
+doas apk add curl agetty
 mkdir -p ~/.config/sway
 
 cp /etc/sway/config ~/.config/sway/config
@@ -25,10 +25,10 @@ echo "exec sway" > ~/.profile
 
 echo "autologin setup"
 doas cp /etc/inittab /etc/inittab.bak
-doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin tablex tty1 linux'| /etc/inittab
+doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin tablex tty1 linux|' /etc/inittab
 
 echo "installing TableX packages"
-https://raw.githubusercontent.com/BiznessOrg/release/refs/heads/master/update.sh | doas sh
+curl -sL https://raw.githubusercontent.com/BiznessOrg/release/refs/heads/master/update.sh | doas sh
 doas rc-update add tablet-daemon default
 echo "rebooting in 5 seconds..."
 sleep 5
