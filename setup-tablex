@@ -4,27 +4,28 @@
 ##########################################
 
 echo "## TableX Setup Script Started ##"
-doas pkg update
+doas akg update
 echo "sway setup"
 doas setup-desktop sway
-doas pkg add curl agetty
+doas akg add curl agetty
 mkdir -p ~/.config/sway
-# cp /etc/sway/config ~/.config/sway/config
+
+cp /etc/sway/config ~/.config/sway/config
+
 echo "writing sway config"
-cat > ~/.config/sway/config << eof
-bar {
-    mode invisible
-}
+cat >> ~/.config/sway/config << eof
 default_border none
 default_floating_border none
-font pango:monospace 0.0001
+font pango:monospace 0.001
 eof
+sed -i 's|position top|mode invisible|g' ~/.config/sway/config
+
 echo "Sway autostart setup"
 echo "exec sway" > ~/.profile
 
 echo "autologin setup"
 doas cp /etc/inittab /etc/inittab.bak
-doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin tablex tty1 linux|"" /etc/inittab
+doas sed -i 's|^tty1::respawn/sbin/getty.*|tty1::respawn:/sbin/agetty --autologin tablex tty1 linux'| /etc/inittab
 
 echo "installing TableX packages"
 https://raw.githubusercontent.com/BiznessOrg/release/refs/heads/master/update.sh | doas sh

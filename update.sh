@@ -5,9 +5,7 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-for pkg in curl stow unzip; do
-	apk add "$pkg"
-done
+apk add curl stow unzip jq
 
 cd $HOME
 
